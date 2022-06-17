@@ -1,6 +1,8 @@
-package com.safetynet.safetynetalert.controller;
+package com.safetynet.safetynetalert.controllers;
 
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,20 +11,22 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.safetynetalert.model.Allergy;
 import com.safetynet.safetynetalert.model.Medication;
 import com.safetynet.safetynetalert.model.Person;
 
-
 @RestController
-@RequestMapping("/test")
-public class Test {
+@RequestMapping("/personInfo")
+public class PersonInfoController {
 
-	
-	@GetMapping("/read")
-	public void readJson() {
+	@GetMapping
+	public @ResponseBody void personInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+		
+		
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader("data.json"));
@@ -30,7 +34,6 @@ public class Test {
 			
 			JSONArray persons = (JSONArray) jsonObject.get("persons");
 			JSONArray medicalRecords = (JSONArray) jsonObject.get("medicalrecords");
-
 			
 			for(int i = 0; i < persons.size(); i++) {
 				
@@ -49,8 +52,13 @@ public class Test {
 				person.setCity((String) jsonPerson.get("city"));
 				person.setPhone((String) jsonPerson.get("phone"));
 				person.setZipCode((String) jsonPerson.get("zip"));
-				person.setBirthDate((String) jsonMedic.get("birthdate"));
-				person.setEmail((String) jsonMedic.get("email"));
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				String dateString = (String) jsonMedic.get("birthdate");
+				Date birthDate = formatter.parse(dateString);
+				
+				person.setBirthDate(birthDate);
+				person.setEmail((String) jsonPerson.get("email"));
 				
 				
 				JSONArray medic = (JSONArray) jsonMedic.get("medications");
@@ -71,14 +79,19 @@ public class Test {
 					allergList.add(allergy);
 				}		
 				person.setAllergies(allergList);
-				
-				System.out.println(person.toString());
+
+
+				if(firstName.equalsIgnoreCase(person.getFirstName()) && lastName.equalsIgnoreCase(person.getLastName())) {
+					Date date = new Date();
+					System.out.println("Prénom : " + person.getFirstName() + ", Nom : " + person.getLastName() + ", Age : " + Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)) + ", Adresse : " + person.getAddress() + ", Email : " + person.getEmail()  + ", Médicaments : " + person.getMedications() + ", Allergies : " + person.getAllergies());
+				}
+
 			}
 					
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
-   
 }

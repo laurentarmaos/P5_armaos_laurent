@@ -1,5 +1,6 @@
 package com.safetynet.safetynetalert.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ public class Person extends AbstractModel{
 
 		private String firstName;
 		private String lastName;
-		private String birthDate;
+		private Date birthDate;
 		private String address;
 		private String city;
 		private String zipCode;
@@ -40,11 +41,11 @@ public class Person extends AbstractModel{
 		}
 
 		
-		public String getBirthDate() {
+		public Date getBirthDate() {
 			return birthDate;
 		}
 
-		public void setBirthDate(String birthDate) {
+		public void setBirthDate(Date birthDate) {
 			this.birthDate = birthDate;
 		}
 
