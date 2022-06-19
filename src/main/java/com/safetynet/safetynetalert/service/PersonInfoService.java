@@ -1,11 +1,9 @@
 package com.safetynet.safetynetalert.service;
 
-import org.springframework.stereotype.Service;
+public interface PersonInfoService {
 
-
-
-@Service
-public class PersonInfoService {
-
+	
+	void personInfo(String firstName, String lastName);
+	
 	
 }

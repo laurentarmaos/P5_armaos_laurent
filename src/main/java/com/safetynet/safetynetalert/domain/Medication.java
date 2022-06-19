@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalert.model;
+package com.safetynet.safetynetalert.domain;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalert.model;
+package com.safetynet.safetynetalert.domain;
 
 public class FireStation extends AbstractModel{
 	
