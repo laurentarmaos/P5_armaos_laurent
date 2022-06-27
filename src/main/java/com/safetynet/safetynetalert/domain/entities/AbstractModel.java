@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalert.domain;
+package com.safetynet.safetynetalert.domain.entities;
 
 public abstract class AbstractModel {
 	

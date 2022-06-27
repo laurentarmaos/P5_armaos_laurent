@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalert.controllers;
+package com.safetynet.safetynetalert.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/firestation")
-public class FireStationPersonsInfosController {
+@RequestMapping("/fire")
+public class FireAlertController {
 
 	@GetMapping
-	public @ResponseBody String fireStationPersonsInfos(@RequestParam("stationNumber") String stationNumber) {
+	public @ResponseBody String fireAlert(@RequestParam("address") String address) {
 		
-		return stationNumber;
+		return address;
 	}
 }

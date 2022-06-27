@@ -1,23 +1,15 @@
-package com.safetynet.safetynetalert.domain;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+package com.safetynet.safetynetalert.domain.entities;
 
 
 public class Person extends AbstractModel{
 
 		private String firstName;
 		private String lastName;
-		private Date birthDate;
 		private String address;
 		private String city;
-		private String zipCode;
+		private String zip;
 		private String phone;
 		private String email;
-		Set <Allergy> allergies = new HashSet <Allergy>();
-		Set <Medication> medications = new HashSet <Medication>();
 
 		
 		public Person() {
@@ -41,17 +33,7 @@ public class Person extends AbstractModel{
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
 		}
-
-		
-		public Date getBirthDate() {
-			return birthDate;
-		}
-
-		public void setBirthDate(Date birthDate) {
-			this.birthDate = birthDate;
-		}
-
-		
+	
 		public String getAddress() {
 			return address;
 		}
@@ -71,11 +53,11 @@ public class Person extends AbstractModel{
 
 
 		public String getZipCode() {
-			return zipCode;
+			return zip;
 		}
 
 		public void setZipCode(String zipCode) {
-			this.zipCode = zipCode;
+			this.zip = zipCode;
 		}
 
 
@@ -96,30 +78,12 @@ public class Person extends AbstractModel{
 			this.email = email;
 		}
 
-
-		public Set <Allergy> getAllergies() {
-			return allergies;
-		}
-
-		public void setAllergies(Set <Allergy> allergies) {
-			this.allergies = allergies;
-		}
-
-
-		public Set <Medication> getMedications() {
-			return medications;
-		}
-
-		public void setMedications(Set <Medication> medications) {
-			this.medications = medications;
-		}
-
-
+		
 		@Override
 		public String toString() {
-			return "Person [firstName=" + firstName + ", lastName=" + lastName + ", birthDate=" + birthDate
-					+ ", address=" + address + ", city=" + city + ", zipCode=" + zipCode + ", phone=" + phone
-					+ ", email=" + email + ", allergies=" + allergies + ", medications=" + medications + "]";
+			return "Person [firstName=" + firstName + ", lastName=" + lastName + ", birthDate="
+					+ ", address=" + address + ", city=" + city + ", zipCode=" + zip + ", phone=" + phone
+					+ ", email=" + email + "]";
 		}
 		
 		

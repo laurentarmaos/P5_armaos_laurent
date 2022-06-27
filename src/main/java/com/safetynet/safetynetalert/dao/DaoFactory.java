@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalert.daos;
+package com.safetynet.safetynetalert.dao;
 
 import java.io.FileReader;
 import org.json.simple.JSONObject;
