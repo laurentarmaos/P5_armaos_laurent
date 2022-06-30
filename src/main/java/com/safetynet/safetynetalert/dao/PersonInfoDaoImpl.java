@@ -25,5 +25,14 @@ public class PersonInfoDaoImpl implements PersonInfoDao{
 		
 		return medicalRecords;
 	}
+	
+	@Override
+	public JSONArray getFireStation() {
+		
+	JSONArray fireStation = (JSONArray) daoFactory.connectToJson().get("firestations");
+	
+	return fireStation;
+	
+	}
 
 }

@@ -6,13 +6,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynet.safetynetalert.service.ChildAlertService;
+
 @RestController
 @RequestMapping("/childAlert")
 public class ChildAlertController {
 
+	private final ChildAlertService service;
+	
+	
+	
+	public ChildAlertController(ChildAlertService service) {
+		this.service = service;
+	}
+
+
+
 	@GetMapping
-	public @ResponseBody String childAlert(@RequestParam("address") String personAddress) {
+	public @ResponseBody void childAlert(@RequestParam("address") String personAddress) {
 		
-		return personAddress;
+		service.childAlert(personAddress);
 	}
 }
