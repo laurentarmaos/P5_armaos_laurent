@@ -3,10 +3,19 @@ package com.safetynet.safetynetalert.domain.dtos;
 public class FireStationDto {
 
 	private String address;
-	private int station;
+	private String station;
 	
 	public FireStationDto() {
 		
+	}
+
+	public FireStationDto(String address, String station) {
+		this.address = address;
+		this.station = station;
+	}
+
+	public FireStationDto(String address) {
+		this.address = address;
 	}
 
 	public String getAddress() {
@@ -17,11 +26,11 @@ public class FireStationDto {
 		this.address = address;
 	}
 
-	public int getStation() {
+	public String getStation() {
 		return station;
 	}
 
-	public void setStation(int station) {
+	public void setStation(String station) {
 		this.station = station;
 	}
 

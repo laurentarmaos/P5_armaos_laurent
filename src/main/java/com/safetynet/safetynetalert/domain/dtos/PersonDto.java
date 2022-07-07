@@ -14,10 +14,59 @@ public class PersonDto {
 	private String zipCode;
 	private String phone;
 	private String email;
+	private double age;
+	
+
 	Set <String> allergies = new HashSet <String>();
 	Set<String> medications = new HashSet <String>();
 	
 	public PersonDto() {}
+	
+	
+
+	public PersonDto(String firstName, String lastName, String address, String email, double age, Set<String> allergies,
+			Set<String> medications) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+		this.age = age;
+		this.allergies = allergies;
+		this.medications = medications;
+	}
+
+	public PersonDto(String firstName, String lastName, double age) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+
+	public PersonDto(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public PersonDto(String email) {
+		this.email = email;
+	}
+
+	public PersonDto(String firstName, String lastName, String phone, double age, Set<String> medications,
+			Set<String> allergies) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.age = age;
+		this.allergies = allergies;
+		this.medications = medications;
+	}
+
+	public PersonDto(String firstName, String lastName, String address, String phone) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phone = phone;
+	}
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -82,6 +131,14 @@ public class PersonDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public double getAge() {
+		return age;
+	}
+
+	public void setAge(double age) {
+		this.age = age;
+	}
 
 	public Set<String> getAllergies() {
 		return allergies;
@@ -98,6 +155,9 @@ public class PersonDto {
 	public void setMedications(Set<String> medicList) {
 		this.medications = medicList;
 	}
+	
+	
+
 
 	@Override
 	public String toString() {
@@ -105,8 +165,6 @@ public class PersonDto {
 				+ ", address=" + address + ", city=" + city + ", zipCode=" + zipCode + ", phone=" + phone + ", email="
 				+ email + ", allergies=" + allergies + ", medications=" + medications + "]";
 	}
-	
-	
 	
 	
 }

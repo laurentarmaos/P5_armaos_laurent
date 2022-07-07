@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PersonInfoDaoImpl implements PersonInfoDao{
+public class InfoDaoImpl implements InfoDao{
 	
 
 	 private final DaoFactory daoFactory = new DaoFactory();
@@ -29,9 +29,9 @@ public class PersonInfoDaoImpl implements PersonInfoDao{
 	@Override
 	public JSONArray getFireStation() {
 		
-	JSONArray fireStation = (JSONArray) daoFactory.connectToJson().get("firestations");
-	
-	return fireStation;
+		JSONArray fireStation = (JSONArray) daoFactory.connectToJson().get("firestations");
+		
+		return fireStation;
 	
 	}
 

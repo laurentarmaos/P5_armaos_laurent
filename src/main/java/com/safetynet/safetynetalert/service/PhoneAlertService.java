@@ -1,5 +1,7 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.List;
+
 public interface PhoneAlertService {
-	void alert(String fireStationNubmer);
+	List<Object> alert(String fireStationNubmer);
 }

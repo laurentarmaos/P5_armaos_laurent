@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalert.controller;
 
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +22,9 @@ public class CommunityEmailController {
 	}
 	
 	@GetMapping
-	public @ResponseBody void getEmails(@RequestParam("city") String city) {
+	public @ResponseBody List<Object> getEmails(@RequestParam("city") String city) {
 		
-		service.emailCity(city);
+		return service.emailCity(city);
 		
 	}
 

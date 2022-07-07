@@ -2,14 +2,17 @@ package com.safetynet.safetynetalert.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.safetynet.safetynetalert.dao.PersonInfoDao;
+import com.google.gson.Gson;
+import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 
 
@@ -17,18 +20,19 @@ import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 @Service
 public class ChildAlertServiceImpl implements ChildAlertService {
 	
-	private final PersonInfoDao personInfoDao;
+	private final InfoDao personInfoDao;
 	
 
-	public ChildAlertServiceImpl(PersonInfoDao personInfoDao) {
+	public ChildAlertServiceImpl(InfoDao personInfoDao) {
 		this.personInfoDao = personInfoDao;
 	}
 
 
+	List<Object> result = new ArrayList<Object>();
+	
 	@Override
-	public void childAlert(String address) {
+	public List<Object> childAlert(String address) {
 
-		Set<String> family = new HashSet<String>();
 		Set<String> child = new HashSet<String>();
 		
 		for(int i = 0; i < personInfoDao.getPerson().size(); i++) {
@@ -42,6 +46,7 @@ public class ChildAlertServiceImpl implements ChildAlertService {
 				
 				if( jsonPerson.get("firstName").equals(jsonMedic.get("firstName")) && jsonPerson.get("lastName").equals(jsonMedic.get("lastName")) && jsonPerson.get("address").equals(address)) {
 					
+					Date date = new Date();
 					PersonDto person = new PersonDto();
 					
 					person.setFirstName((String) jsonPerson.get("firstName"));
@@ -57,16 +62,15 @@ public class ChildAlertServiceImpl implements ChildAlertService {
 						e.printStackTrace();
 					}
 					
-					Date date = new Date();
+					person.setAge(Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)));
 					
-					
-					
-					if(Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)) > 18) {
-						family.add(person.getFirstName() + " " + person.getLastName());
+					if(person.getAge() > 18) {
+						result.add(new PersonDto(person.getFirstName(), person.getLastName()));
 					}
 					
-					if(Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)) < 18) {
-						child.add(person.getFirstName() + " " + person.getLastName() + " " + Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)) + " ans");
+					if(person.getAge() < 18) {
+						child.add("");
+						result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getAge()));
 					}
 					
 				}
@@ -75,7 +79,12 @@ public class ChildAlertServiceImpl implements ChildAlertService {
 		}
 		
 		if(child.size() != 0) {		
-			System.out.println( "enfants : " + child + ", autres membres de la famille : " + family);
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(result);
+			System.out.println(jsonString);
+			return result;
+		}else {
+			return null;
 		}
 		
 	}

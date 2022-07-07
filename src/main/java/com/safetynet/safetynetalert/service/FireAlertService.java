@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.List;
+
 public interface FireAlertService {
 
-	void fireAlert(String address);
+	List<Object> fireAlert(String address);
 }

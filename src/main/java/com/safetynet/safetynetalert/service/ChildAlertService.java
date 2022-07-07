@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.List;
+
 public interface ChildAlertService {
 
-	void childAlert(String address);
+	List<Object> childAlert(String address);
 }

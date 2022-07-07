@@ -1,9 +1,11 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.List;
+
 public interface PersonInfoService {
 
 	
-	void personInfo(String firstName, String lastName);
+	List<Object> personInfo(String firstName, String lastName);
 	
 	
 }

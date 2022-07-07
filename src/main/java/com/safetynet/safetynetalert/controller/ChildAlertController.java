@@ -1,5 +1,7 @@
 package com.safetynet.safetynetalert.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +25,8 @@ public class ChildAlertController {
 
 
 	@GetMapping
-	public @ResponseBody void childAlert(@RequestParam("address") String personAddress) {
+	public @ResponseBody List<Object> childAlert(@RequestParam("address") String personAddress) {
 		
-		service.childAlert(personAddress);
+		return service.childAlert(personAddress);
 	}
 }

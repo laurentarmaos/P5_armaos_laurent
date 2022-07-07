@@ -2,15 +2,18 @@ package com.safetynet.safetynetalert.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.safetynet.safetynetalert.dao.PersonInfoDao;
+import com.google.gson.Gson;
+import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.AllergyDto;
 import com.safetynet.safetynetalert.domain.dtos.MedicationDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
@@ -20,27 +23,24 @@ import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 @Service
 public class PersonInfoServiceImpl implements PersonInfoService{
 
-	private final PersonInfoDao personInfoDao;
+	private final InfoDao infoDao;
 	
-	public PersonInfoServiceImpl(PersonInfoDao personInfoDao) {
-		this.personInfoDao = personInfoDao;
+	public PersonInfoServiceImpl(InfoDao infoDao) {
+		this.infoDao = infoDao;
 	}
 
-	
+	List<Object> result = new ArrayList<Object>();
 	
 	@Override
-	public void personInfo(String firstName, String lastName) {
+	public List<Object> personInfo(String firstName, String lastName) {
 
-		//boucle sur le tableau "persons"
-		for(int i = 0; i < personInfoDao.getPerson().size(); i++) {
+		for(int i = 0; i < infoDao.getPerson().size(); i++) {
 					
-			JSONObject jsonPerson = (JSONObject) personInfoDao.getPerson().get(i);
+			JSONObject jsonPerson = (JSONObject) infoDao.getPerson().get(i);
 			
-			//boucle sur le tableau "medicalRecords"
-			for(int k = 0; k < personInfoDao.getMedic().size(); k++) {
-				JSONObject jsonMedic = (JSONObject) personInfoDao.getMedic().get(k);
+			for(int k = 0; k < infoDao.getMedic().size(); k++) {
+				JSONObject jsonMedic = (JSONObject) infoDao.getMedic().get(k);
 				
-				// vérification que la ligne k de "medicalRecords" correspond à la ligne i de "persons" en comparant les noms et prénoms des personnes
 				if( jsonPerson.get("firstName").equals(jsonMedic.get("firstName")) && jsonPerson.get("lastName").equals(jsonMedic.get("lastName")) ) {
 					
 					// création des objets dto
@@ -48,7 +48,6 @@ public class PersonInfoServiceImpl implements PersonInfoService{
 					MedicationDto medication = new MedicationDto();
 					PersonDto person = new PersonDto();
 					
-					// instanciation des objets dto
 					person.setFirstName((String) jsonPerson.get("firstName"));
 					person.setLastName((String) jsonPerson.get("lastName"));
 					person.setAddress((String) jsonPerson.get("address"));
@@ -66,10 +65,10 @@ public class PersonInfoServiceImpl implements PersonInfoService{
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-										
+							
+					Date date = new Date();
+					person.setAge(Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)));
 					
-					
-					// récupération de la liste des médicaments et allergies pour les ajouter dans PersonDto
 					JSONArray medic = (JSONArray) jsonMedic.get("medications");
 					JSONArray allerg = (JSONArray) jsonMedic.get("allergies");
 				
@@ -89,14 +88,17 @@ public class PersonInfoServiceImpl implements PersonInfoService{
 					}		
 					person.setAllergies(allergList);
 
-					
-					// récupère les informations de la personne dont le nom et prénom sont écrits dans l'url
+
 					if(firstName.equalsIgnoreCase(person.getFirstName()) && lastName.equalsIgnoreCase(person.getLastName())) {
-						Date date = new Date();
-						System.out.println("Prénom : " + person.getFirstName() + ", Nom : " + person.getLastName() + ", Age : " + Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)) + ", Adresse : " + person.getAddress() + ", Email : " + person.getEmail()  + ", Médicaments : " + person.getMedications() + ", Allergies : " + person.getAllergies() );
+						
+						result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getAddress(), person.getEmail(), person.getAge(), person.getAllergies(), person.getMedications()));
 					}			
 				}
 			}
 		}
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(result);
+		System.out.println(jsonString);
+		return result;
 	}	
 }

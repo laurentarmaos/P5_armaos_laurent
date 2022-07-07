@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalert.controller;
 
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +23,9 @@ public class PersonInfoController {
 	
 	
 	@GetMapping
-	public @ResponseBody void personInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public @ResponseBody List<Object> personInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 		
-		service.personInfo(firstName, lastName);
+		return service.personInfo(firstName, lastName);
 
 	}
 }

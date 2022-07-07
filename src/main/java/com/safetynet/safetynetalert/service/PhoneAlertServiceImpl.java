@@ -1,22 +1,28 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.safetynet.safetynetalert.dao.PersonInfoDao;
+import com.google.gson.Gson;
+import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 
 @Service
 public class PhoneAlertServiceImpl implements PhoneAlertService{
 
-	private final PersonInfoDao personInfoDao;
+	private final InfoDao personInfoDao;
 	
-	public PhoneAlertServiceImpl(PersonInfoDao personInfoDao) {
+	public PhoneAlertServiceImpl(InfoDao personInfoDao) {
 		this.personInfoDao = personInfoDao;
 	}
 	
+	List<Object> result = new ArrayList<Object>();
+	
 	@Override
-	public void alert(String fireStationNubmer) {
+	public List<Object> alert(String fireStationNubmer) {
 
 		for(int i = 0; i < personInfoDao.getFireStation().size(); i++) {
 			
@@ -33,12 +39,18 @@ public class PhoneAlertServiceImpl implements PhoneAlertService{
 					
 					person.setPhone((String) jsonPerson.get("phone"));
 					
+					result.add(new PersonDto(person.getPhone()));
 					System.out.println(person.getPhone());
 				}
 				
 			}
 			
 		}	
+		
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(result);
+		System.out.println(jsonString);
+		return result;
 		
 	}
 

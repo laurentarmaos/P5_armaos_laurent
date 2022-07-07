@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalert.service;
 
+import java.util.List;
+
 public interface CommunityEmailService {
 
-	void emailCity(String city);
+	List<Object> emailCity(String city);
 }
