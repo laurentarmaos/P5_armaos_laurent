@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
+import com.safetynet.safetynetalert.domain.dtos.PhoneAlertDto;
 
 @Service
 public class PhoneAlertServiceImpl implements PhoneAlertService{
@@ -19,10 +20,12 @@ public class PhoneAlertServiceImpl implements PhoneAlertService{
 		this.personInfoDao = personInfoDao;
 	}
 	
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result;
 	
 	@Override
 	public List<Object> alert(String fireStationNubmer) {
+		
+		result  = new ArrayList<Object>();
 
 		for(int i = 0; i < personInfoDao.getFireStation().size(); i++) {
 			
@@ -39,7 +42,7 @@ public class PhoneAlertServiceImpl implements PhoneAlertService{
 					
 					person.setPhone((String) jsonPerson.get("phone"));
 					
-					result.add(new PersonDto(person.getPhone()));
+					result.add(new PhoneAlertDto(person.getPhone()));
 					System.out.println(person.getPhone());
 				}
 				

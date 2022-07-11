@@ -18,6 +18,7 @@ import com.safetynet.safetynetalert.domain.dtos.AllergyDto;
 import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
 import com.safetynet.safetynetalert.domain.dtos.MedicationDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
+import com.safetynet.safetynetalert.domain.dtos.StationsPersonsInfosDto;
 
 @Service
 public class StationsPersonsInfosServiceImpl implements StationsPersonsInfosService {
@@ -28,16 +29,18 @@ public class StationsPersonsInfosServiceImpl implements StationsPersonsInfosServ
 		this.infoDao = infoDao;
 	}
 
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result; 
+	
+	
 
 	@Override
 	public List<Object> stationPersonsInfo(String fireStationNubmer) {
-
 		PersonDto person = new PersonDto();
 		FireStationDto fireStation = new FireStationDto();
 		AllergyDto allergy = new AllergyDto();
 		MedicationDto medication = new MedicationDto();
 		
+		result = new ArrayList<Object>();
 		
 		for(int i = 0; i < infoDao.getFireStation().size(); i++) {
 			
@@ -45,7 +48,8 @@ public class StationsPersonsInfosServiceImpl implements StationsPersonsInfosServ
 			
 			if(jsonFireStation.get("station").equals(fireStationNubmer)) {
 				fireStation.setAddress( (String) jsonFireStation.get("address") );
-				result.add(new FireStationDto(fireStation.getAddress()));
+				fireStation.setStation(fireStationNubmer);
+				result.add(new FireStationDto(fireStation.getAddress(), fireStation.getStation()));
 				
 				
 				for(int j = 0; j < infoDao.getPerson().size(); j++) {
@@ -94,7 +98,7 @@ public class StationsPersonsInfosServiceImpl implements StationsPersonsInfosServ
 								}		
 								person.setAllergies(allergList);
 								
-								result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getPhone(), person.getAge(), person.getMedications(), person.getAllergies()));
+								result.add(new StationsPersonsInfosDto(person.getFirstName(), person.getLastName(), person.getPhone(), person.getAge(), person.getMedications(), person.getAllergies()));
 							}
 						}
 					}

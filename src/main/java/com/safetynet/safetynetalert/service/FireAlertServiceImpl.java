@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.AllergyDto;
+import com.safetynet.safetynetalert.domain.dtos.FireAlertDto;
 import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
 import com.safetynet.safetynetalert.domain.dtos.MedicationDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
@@ -29,10 +30,12 @@ public class FireAlertServiceImpl implements FireAlertService{
 		this.infoDao = infoDao;
 	}
 
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result;
 	
 	@Override
 	public List<Object> fireAlert(String address) {
+		
+		result = new ArrayList<Object>();
 
 		PersonDto person = new PersonDto();
 		FireStationDto fireStation = new FireStationDto();
@@ -103,7 +106,7 @@ public class FireAlertServiceImpl implements FireAlertService{
 					person.setAllergies(allergList);
 					
 					
-					result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getPhone(), person.getAge(), person.getMedications(), person.getAllergies()));
+					result.add(new FireAlertDto(person.getFirstName(), person.getLastName(), person.getPhone(), person.getAge(), person.getMedications(), person.getAllergies()));
 					
 				}	
 			}		

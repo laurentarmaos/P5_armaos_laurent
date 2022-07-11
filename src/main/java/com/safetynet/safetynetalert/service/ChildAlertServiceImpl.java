@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.safetynet.safetynetalert.dao.InfoDao;
+import com.safetynet.safetynetalert.domain.dtos.ChildAlertMaDto;
+import com.safetynet.safetynetalert.domain.dtos.ChildAlertMiDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 
 
@@ -28,10 +30,12 @@ public class ChildAlertServiceImpl implements ChildAlertService {
 	}
 
 
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result;
 	
 	@Override
 	public List<Object> childAlert(String address) {
+		
+		result = new ArrayList<Object>();
 
 		Set<String> child = new HashSet<String>();
 		
@@ -65,12 +69,12 @@ public class ChildAlertServiceImpl implements ChildAlertService {
 					person.setAge(Math.ceil((date.getTime() - person.getBirthDate().getTime())/(86400 * 1000 * 365.24)));
 					
 					if(person.getAge() > 18) {
-						result.add(new PersonDto(person.getFirstName(), person.getLastName()));
+						result.add(new ChildAlertMaDto(person.getFirstName(), person.getLastName()));
 					}
 					
 					if(person.getAge() < 18) {
 						child.add("");
-						result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getAge()));
+						result.add(new ChildAlertMiDto(person.getFirstName(), person.getLastName(), person.getAge()));
 					}
 					
 				}

@@ -17,6 +17,7 @@ import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.AllergyDto;
 import com.safetynet.safetynetalert.domain.dtos.MedicationDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
+import com.safetynet.safetynetalert.domain.dtos.PersonInfoDto;
 
 
 
@@ -29,10 +30,12 @@ public class PersonInfoServiceImpl implements PersonInfoService{
 		this.infoDao = infoDao;
 	}
 
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result;
 	
 	@Override
 	public List<Object> personInfo(String firstName, String lastName) {
+		
+		result = new ArrayList<Object>();
 
 		for(int i = 0; i < infoDao.getPerson().size(); i++) {
 					
@@ -91,7 +94,7 @@ public class PersonInfoServiceImpl implements PersonInfoService{
 
 					if(firstName.equalsIgnoreCase(person.getFirstName()) && lastName.equalsIgnoreCase(person.getLastName())) {
 						
-						result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getAddress(), person.getEmail(), person.getAge(), person.getAllergies(), person.getMedications()));
+						result.add(new PersonInfoDto(person.getFirstName(), person.getLastName(), person.getAddress(), person.getEmail(), person.getAge(), person.getAllergies(), person.getMedications()));
 					}			
 				}
 			}

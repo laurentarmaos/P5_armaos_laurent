@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
+import com.safetynet.safetynetalert.domain.dtos.FireStationPersonsInfosDto;
 import com.safetynet.safetynetalert.domain.dtos.PersonDto;
 
 @Service
@@ -25,11 +26,13 @@ public class FireStationPersonsInfosServiceImpl implements FireStationPersonsInf
 	}
 
 
-	List<Object> result = new ArrayList<Object>();
+	List<Object> result;
 	
 	
 	@Override
 	public List<Object> fireStationPersonsInfos(String fireStationNumber) {
+		
+		result = new ArrayList<Object>();
 
 		PersonDto person = new PersonDto();
 		FireStationDto fireStation = new FireStationDto();
@@ -78,7 +81,7 @@ public class FireStationPersonsInfosServiceImpl implements FireStationPersonsInf
 									adult++;
 								}
 												
-								result.add(new PersonDto(person.getFirstName(), person.getLastName(), person.getAddress(), person.getPhone()));
+								result.add(new FireStationPersonsInfosDto(person.getFirstName(), person.getLastName(), person.getAddress(), person.getPhone()));
 							}
 						}
 					}
