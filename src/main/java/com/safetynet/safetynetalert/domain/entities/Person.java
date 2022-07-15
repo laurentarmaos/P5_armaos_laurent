@@ -52,12 +52,12 @@ public class Person extends AbstractModel{
 		}
 
 
-		public String getZipCode() {
+		public String getZip() {
 			return zip;
 		}
 
-		public void setZipCode(String zipCode) {
-			this.zip = zipCode;
+		public void setZipCode(String zip) {
+			this.zip = zip;
 		}
 
 
