@@ -32,7 +32,7 @@ public class FireStationController {
 		return service.createFireStation(dto);
 	}
 	
-	@GetMapping
+	@GetMapping("/get")
 	public @ResponseBody JSONObject getFireStation(@RequestParam String address) {
 		return service.getFireStation(address);
 	}
