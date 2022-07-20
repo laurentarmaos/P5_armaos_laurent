@@ -1,13 +1,18 @@
 package com.safetynet.safetynetalert.service;
 
-import com.safetynet.safetynetalert.domain.dtos.MedicationDto;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.safetynet.safetynetalert.domain.dtos.MedicalRecordsCreate;
 
 public interface MedicalRecordService {
 	
-	MedicationDto createMedicalRecord();
+	JSONArray createMedicalRecord(MedicalRecordsCreate dto);
 	
-	MedicationDto updateMedicalRecord(String firstName, String lastName);
+	JSONObject getMedicalRecord (String firstName, String lastName);
 	
-	MedicationDto deleteMedicalRecord(String firstName, String lastName);
+	JSONObject updateMedicalRecord(String firstName, String lastName);
+	
+	JSONObject deleteMedicalRecord(String firstName, String lastName);
 
 }

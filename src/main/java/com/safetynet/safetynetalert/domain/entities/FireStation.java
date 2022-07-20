@@ -1,6 +1,6 @@
 package com.safetynet.safetynetalert.domain.entities;
 
-public class FireStation extends AbstractModel{
+public class FireStation {
 	
 	private String address;
 	private int station;

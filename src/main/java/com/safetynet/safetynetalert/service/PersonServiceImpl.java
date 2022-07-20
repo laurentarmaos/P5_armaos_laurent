@@ -1,11 +1,15 @@
 package com.safetynet.safetynetalert.service;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 
 import com.safetynet.safetynetalert.dao.InfoDao;
+import com.safetynet.safetynetalert.domain.dtos.PersonCreate;
 import com.safetynet.safetynetalert.domain.entities.Person;
 
 @Service
@@ -20,21 +24,21 @@ public class PersonServiceImpl implements PersonService {
 	
 
 	@Override
-	public JSONArray createPerson(Person dto) {
+	public JSONArray createPerson(PersonCreate dto) {
 		
 		
-		Person entity = new Person();
+		PersonCreate entity = new PersonCreate();
+		
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
 		entity.setAddress(dto.getAddress());
 		entity.setCity(dto.getCity());
-		entity.setZipCode(dto.getZip());
+		entity.setZip(dto.getZip());
 		entity.setPhone(dto.getPhone());
 		entity.setEmail(dto.getEmail());
 		
 		
 		JSONArray persons = infoDao.getPerson();
-		
 		
 		persons.add(entity);
 		

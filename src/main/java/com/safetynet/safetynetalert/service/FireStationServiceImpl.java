@@ -1,5 +1,7 @@
 package com.safetynet.safetynetalert.service;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
@@ -8,21 +10,29 @@ import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
 public class FireStationServiceImpl implements FireStationService{
 
 	@Override
-	public FireStationDto createFireStation() {
+	public JSONArray createFireStation(FireStationDto dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public FireStationDto updateFireStation(String address) {
+	public JSONObject getFireStation(String address) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public FireStationDto deleteFireStation(String address) {
+	public JSONObject updateFireStation(String address) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public JSONObject deleteFireStation(String address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }

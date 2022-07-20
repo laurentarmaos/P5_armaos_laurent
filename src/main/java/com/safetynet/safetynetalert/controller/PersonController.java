@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.safetynetalert.domain.dtos.PersonDto;
-import com.safetynet.safetynetalert.domain.entities.Person;
+import com.safetynet.safetynetalert.domain.dtos.PersonCreate;
 import com.safetynet.safetynetalert.service.PersonService;
 
 @RestController
@@ -28,7 +27,7 @@ public class PersonController {
 
 
 	@PostMapping("/create")
-	public JSONArray createPerson(@RequestBody Person dto) {
+	public JSONArray createPerson(@RequestBody PersonCreate dto) {
 		
 		return service.createPerson(dto);
 	}

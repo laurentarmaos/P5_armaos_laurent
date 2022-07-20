@@ -1,7 +1,7 @@
 package com.safetynet.safetynetalert.domain.entities;
 
 
-public class Person extends AbstractModel{
+public class Person {
 
 		private String firstName;
 		private String lastName;

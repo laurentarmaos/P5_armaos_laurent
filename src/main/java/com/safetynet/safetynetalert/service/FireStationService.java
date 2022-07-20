@@ -1,12 +1,17 @@
 package com.safetynet.safetynetalert.service;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.safetynet.safetynetalert.domain.dtos.FireStationDto;
 
 public interface FireStationService {
 
-	FireStationDto createFireStation();
+	JSONArray createFireStation(FireStationDto dto);
 	
-	FireStationDto updateFireStation(String address);
+	JSONObject getFireStation(String address);
 	
-	FireStationDto deleteFireStation(String address);
+	JSONObject updateFireStation(String address);
+	
+	JSONObject deleteFireStation(String address);
 }
