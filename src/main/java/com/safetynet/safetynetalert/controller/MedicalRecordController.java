@@ -37,13 +37,13 @@ public class MedicalRecordController {
 	}
 	
 	@PutMapping("/update")
-	public @ResponseBody JSONObject updateMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public @ResponseBody JSONArray updateMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody MedicalRecordsCreate dto) {
 		
-		return service.updateMedicalRecord(firstName, lastName);
+		return service.updateMedicalRecord(firstName, lastName, dto);
 	}
 	
 	@DeleteMapping("/delete")
-	public @ResponseBody JSONObject deleteMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public @ResponseBody JSONArray deleteMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 		
 		return service.deleteMedicalRecord(firstName, lastName);
 	}

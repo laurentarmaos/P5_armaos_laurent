@@ -11,8 +11,8 @@ public interface MedicalRecordService {
 	
 	JSONObject getMedicalRecord (String firstName, String lastName);
 	
-	JSONObject updateMedicalRecord(String firstName, String lastName);
+	JSONArray updateMedicalRecord(String firstName, String lastName, MedicalRecordsCreate dto);
 	
-	JSONObject deleteMedicalRecord(String firstName, String lastName);
+	JSONArray deleteMedicalRecord(String firstName, String lastName);
 
 }

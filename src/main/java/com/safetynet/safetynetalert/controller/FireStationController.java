@@ -39,13 +39,13 @@ public class FireStationController {
 	
 	
 	@PutMapping("/update")
-	public @ResponseBody JSONObject updateFireStation(String address) {
-		return service.updateFireStation(address);
+	public @ResponseBody JSONArray updateFireStation(String address, @RequestBody FireStationDto dto) {
+		return service.updateFireStation(address, dto);
 	}
 
 	
 	@DeleteMapping("/delete")
-	public @ResponseBody JSONObject deleteFireStation(String address) {
+	public @ResponseBody JSONArray deleteFireStation(String address) {
 		return service.deleteFireStation(address);
 	}
 	

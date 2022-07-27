@@ -39,13 +39,13 @@ public class PersonController {
 	}
 	
 	@PutMapping("/update")
-	public @ResponseBody JSONObject updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public @ResponseBody JSONArray updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody PersonCreate dto) {
 		
-		return service.updatePerson(firstName, lastName);
+		return service.updatePerson(firstName, lastName, dto);
 	}
 	
 	@DeleteMapping("/delete")
-	public @ResponseBody JSONObject deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public @ResponseBody JSONArray deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 		
 		return service.deletePerson(firstName, lastName);
 	}

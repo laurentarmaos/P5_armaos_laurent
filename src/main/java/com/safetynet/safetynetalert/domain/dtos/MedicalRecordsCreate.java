@@ -1,13 +1,12 @@
 package com.safetynet.safetynetalert.domain.dtos;
 
-import java.util.Date;
 import java.util.Set;
 
 public class MedicalRecordsCreate {
 
 	private String firstName;
 	private String lastName;
-	private Date birthDate;
+	private String birthdate;
 	private Set<String> medications;
 	private Set<String> allergies;
 	
@@ -31,12 +30,12 @@ public class MedicalRecordsCreate {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public String getBirthdate() {
+		return birthdate;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	public Set<String> getMedications() {

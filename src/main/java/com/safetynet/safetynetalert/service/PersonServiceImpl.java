@@ -1,16 +1,12 @@
 package com.safetynet.safetynetalert.service;
 
-import java.io.FileWriter;
-import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
-
 import com.safetynet.safetynetalert.dao.InfoDao;
 import com.safetynet.safetynetalert.domain.dtos.PersonCreate;
-import com.safetynet.safetynetalert.domain.entities.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -22,11 +18,9 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	
-
 	@Override
 	public JSONArray createPerson(PersonCreate dto) {
-		
-		
+				
 		PersonCreate entity = new PersonCreate();
 		
 		entity.setFirstName(dto.getFirstName());
@@ -58,6 +52,8 @@ public class PersonServiceImpl implements PersonService {
 			
 			if(jsonPerson.get("firstName").equals(firstName) && jsonPerson.get("lastName").equals(lastName)) {
 				JSONObject getJsonPerson = (JSONObject) jsonPerson;
+				
+				System.out.println(getJsonPerson);
 				return getJsonPerson;
 			}
 		}
@@ -66,15 +62,56 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public JSONObject updatePerson(String firstName, String lastName) {
+	public JSONArray updatePerson(String firstName, String lastName, PersonCreate dto) {
 		
-		// TODO Auto-generated method stub
+		PersonCreate entity = new PersonCreate();
+		
+		for(int i = 0; i < infoDao.getPerson().size(); i++) {
+			
+			JSONArray persons = infoDao.getPerson();
+			JSONObject jsonPerson = (JSONObject) infoDao.getPerson().get(i);
+			
+			if(jsonPerson.get("firstName").equals(firstName) && jsonPerson.get("lastName").equals(lastName)) {
+				JSONObject getJsonPerson = (JSONObject) jsonPerson;
+
+				entity.setAddress(dto.getAddress());
+				entity.setCity(dto.getCity());
+				entity.setZip(dto.getZip());
+				entity.setPhone(dto.getPhone());
+				entity.setEmail(dto.getEmail());
+				
+				getJsonPerson.put("address", entity.getAddress());
+				getJsonPerson.put("city", entity.getCity());
+				getJsonPerson.put("zip", entity.getZip());
+				getJsonPerson.put("phone", entity.getPhone());
+				getJsonPerson.put("email", entity.getEmail());
+				
+				persons.remove(i);
+				persons.add(i, getJsonPerson);
+				
+				System.out.println(persons);
+				return persons;
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public JSONObject deletePerson(String firstName, String lastName) {
-		// TODO Auto-generated method stub
+	public JSONArray deletePerson(String firstName, String lastName) {
+
+		for(int i = 0; i < infoDao.getPerson().size(); i++) {
+			
+			JSONArray persons = infoDao.getPerson();
+			JSONObject jsonPerson = (JSONObject) infoDao.getPerson().get(i);
+			
+			if(jsonPerson.get("firstName").equals(firstName) && jsonPerson.get("lastName").equals(lastName)) {
+				
+				persons.remove(i);
+				
+				System.out.println(persons);
+				return persons;
+			}
+		}
 		return null;
 	}
 

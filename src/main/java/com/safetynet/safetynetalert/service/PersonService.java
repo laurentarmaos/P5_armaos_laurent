@@ -12,7 +12,7 @@ public interface PersonService {
 	
 	JSONObject getPerson(String firstName, String lastName);
 	
-	JSONObject updatePerson(String firstName, String lastName);
+	JSONArray updatePerson(String firstName, String lastName, PersonCreate dto);
 	
-	JSONObject deletePerson(String firstName, String lastName);
+	JSONArray deletePerson(String firstName, String lastName);
 }

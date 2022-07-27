@@ -11,7 +11,7 @@ public interface FireStationService {
 	
 	JSONObject getFireStation(String address);
 	
-	JSONObject updateFireStation(String address);
+	JSONArray updateFireStation(String address, FireStationDto dto);
 	
-	JSONObject deleteFireStation(String address);
+	JSONArray deleteFireStation(String address);
 }
