@@ -14,9 +14,9 @@ public class FireStationDto {
 		this.station = station;
 	}
 
-	public FireStationDto(String address) {
-		this.address = address;
-	}
+//	public FireStationDto(String address) {
+//		this.address = address;
+//	}
 
 	public String getAddress() {
 		return address;
